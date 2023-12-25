@@ -14,9 +14,28 @@ module.exports = app => {
   });
 
   app.get('/api/blogs', requireLogin, async (req, res) => {
+       const redis=require('redis');
+       const redisUrl='redis://127.0.0.1:6379';
+       const client=redis.createClient(redisUrl);
+       const util=require('util');
+       client.get =util.promisify(client.get);
+
+       //do we have any cache data in redis related tho this query 
+        const cachedblogs=await client.get(req.user.id);
+       //if yes then response to the request right  away and and return 
+         if(cachedblogs){
+
+          console.log("SERVING FOR Cache")
+          return res.send(JSON.parse(blogs));
+         }
+
+       //if no  need to reponse to the request and update our cache to store the data 
+
     const blogs = await Blog.find({ _user: req.user.id });
 
     res.send(blogs);
+    console.log("Serving from mongodb");
+    client.set(req.user.id ,JSON.stringify(blogs));
   });
 
   app.post('/api/blogs', requireLogin, async (req, res) => {
