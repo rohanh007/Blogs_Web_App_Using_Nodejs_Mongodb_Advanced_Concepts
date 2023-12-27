@@ -58,7 +58,6 @@
 // })(BlogForm);
 
 // BlogForm.js
-
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
@@ -83,67 +82,14 @@ class BlogForm extends Component {
 
   render() {
     return (
-      <div
-        style={{
-          maxWidth: '600px',
-          margin: '0 auto',
-          marginTop:'10px',
-          padding: '20px',
-          backgroundColor: '#f5f5f5',
-          boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-          borderRadius: '8px',
-        }}
-      >
+      <div style={styles.container}>
         <form onSubmit={this.props.handleSubmit(this.props.onBlogSubmit)}>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              marginBottom: '20px',
-              paddingRight:'20px',
-            }}
-          >
-            {this.renderFields()}
-          </div>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
-          >
-            <Link
-              to="/blogs"
-              style={{
-                padding: '10px 20px',
-                fontSize: '16px',
-                textAlign: 'center',
-                textDecoration: 'none',
-                cursor: 'pointer',
-                borderRadius: '4px',
-                backgroundColor: '#d32f2f',
-                color: '#fff',
-                transition:
-                  'background-color 0.3s ease-in-out, color 0.3s ease-in-out',
-              }}
-            >
+          <div style={styles.formFieldsContainer}>{this.renderFields()}</div>
+          <div style={styles.buttonContainer}>
+            <Link to="/blogs" style={styles.cancelButton}>
               Cancel
             </Link>
-            <button
-              type="submit"
-              style={{
-                padding: '10px 20px',
-                fontSize: '16px',
-                textAlign: 'center',
-                textDecoration: 'none',
-                cursor: 'pointer',
-                borderRadius: '4px',
-                backgroundColor: '#00796b',
-                color: '#fff',
-                transition:
-                  'background-color 0.3s ease-in-out, color 0.3s ease-in-out',
-              }}
-            >
+            <button type="submit" style={styles.nextButton}>
               Next <i className="material-icons right">done</i>
             </button>
           </div>
@@ -152,6 +98,51 @@ class BlogForm extends Component {
     );
   }
 }
+
+const styles = {
+  container: {
+    maxWidth: '600px',
+    margin: '0 auto',
+    marginTop: '10px',
+    padding: '20px',
+    backgroundColor: '#f5f5f5',
+    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+    borderRadius: '8px',
+  },
+  formFieldsContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginBottom: '20px',
+    paddingRight: '20px',
+  },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  cancelButton: {
+    padding: '10px 20px',
+    fontSize: '16px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    cursor: 'pointer',
+    borderRadius: '4px',
+    backgroundColor: '#d32f2f',
+    color: '#fff',
+    transition: 'background-color 0.3s ease-in-out, color 0.3s ease-in-out',
+  },
+  nextButton: {
+    padding: '10px 20px',
+    fontSize: '16px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    cursor: 'pointer',
+    borderRadius: '4px',
+    backgroundColor: '#00796b',
+    color: '#fff',
+    transition: 'background-color 0.3s ease-in-out, color 0.3s ease-in-out',
+  },
+};
 
 function validate(values) {
   const errors = {};

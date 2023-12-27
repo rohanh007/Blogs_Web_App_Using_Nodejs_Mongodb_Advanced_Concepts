@@ -10,16 +10,16 @@ class Header extends Component {
       case false:
         return (
           <li>
-            <a href={'/auth/google'}>Login With Google</a>
+            <a href={'/auth/google'} style={styles.authLink}>Login With Google</a>
           </li>
         );
       default:
         return [
           <li key="3" style={{ margin: '0 10px' }}>
-            <Link to="/blogs">My Blogs</Link>
+            <Link to="/blogs" style={styles.navLink}>My Blogs</Link>
           </li>,
           <li key="2">
-            <a href={'/auth/logout'}>Logout</a>
+            <a href={'/auth/logout'} style={styles.authLink}>Logout</a>
           </li>
         ];
     }
@@ -27,21 +27,50 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="indigo">
+      <nav style={styles.navBar}>
         <div className="nav-wrapper">
           <Link
             to={this.props.auth ? '/blogs' : '/'}
             className="left brand-logo"
-            style={{ marginLeft: '10px' }}
+            style={{ ...styles.brandLogo, marginLeft: '10px' }}
           >
             Blogster
           </Link>
-          <ul className="right">{this.renderContent()}</ul>
+          <ul className="right" style={styles.navList}>{this.renderContent()}</ul>
         </div>
       </nav>
     );
   }
 }
+
+const styles = {
+  navBar: {
+    backgroundColor: '#f21f77', 
+  },
+  brandLogo: {
+    color: '#fff', 
+    fontSize: '1.5em',
+    fontWeight: 'bold',
+    textDecoration: 'none',
+  },
+  navLink: {
+    color: '#fff', 
+    fontSize: '1em',
+    textDecoration: 'none',
+    transition: 'color 0.3s ease',
+  },
+  authLink: {
+    color: '#fff', 
+    fontSize: '1em',
+    cursor: 'pointer',
+    textDecoration: 'none',
+    transition: 'color 0.3s ease',
+  },
+  navList: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+};
 
 function mapStateToProps({ auth }) {
   return { auth };

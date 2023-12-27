@@ -4,7 +4,7 @@ import BlogList from './blogs/BlogList';
 
 const Dashboard = () => {
   return (
-    <div>
+    <div style={styles.container}>
       <BlogList />
       <div className="fixed-action-btn">
         <Link to="/blogs/new" className="btn-floating btn-large red">
@@ -13,6 +13,14 @@ const Dashboard = () => {
       </div>
     </div>
   );
+};
+
+const styles = {
+  container: {
+    padding: '20px',
+    maxWidth: '1200px',
+    margin: '0 auto',
+  },
 };
 
 export default Dashboard;

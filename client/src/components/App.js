@@ -16,9 +16,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div style={styles.appContainer}>
         <BrowserRouter>
-          <div>
+          <div style={styles.contentContainer}>
             <Header />
             <Switch>
               <Route path="/blogs/new" component={BlogNew} />
@@ -32,5 +32,21 @@ class App extends Component {
     );
   }
 }
+
+const styles = {
+  appContainer: {
+    fontFamily: 'Arial, sans-serif',
+    backgroundColor: '#f5f5f5',
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  contentContainer: {
+    maxWidth: '1200px',
+    width: '100%',
+    padding: '20px',
+  },
+};
 
 export default connect(null, actions)(App);
